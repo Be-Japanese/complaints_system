@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Filament\Resources\Status;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status',
+        'phone',
+        'city_id',
     ];
 
     /**
@@ -53,7 +57,7 @@ class User extends Authenticatable
     public function canAccessPanel(Panel $panel): bool
     {
 
-        return $this->status == 'Active';
+        return $this->status == Status::Active;
     }
 
 

@@ -31,6 +31,16 @@ class PermissionSeeder extends Seeder
         "delete-cities",
         "show-cities",
 
+        "create-categories",
+        "edit-categories",
+        "delete-categories",
+        "show-categories",
+
+        "create-complaints",
+        "edit-complaints",
+        "delete-complaints",
+        "show-complaints",
+
 
       ];
 

@@ -20,6 +20,13 @@
     "delete-categories": "حذف التصنيفات",
     "show-categories": "عرض التصنيفات",
 
+    "create-complaints": "إنشاء الشكاوي",
+    "edit-complaints": "تعديل الشكاوي",
+    "delete-complaints": "حذف الشكاوي",
+    "show-complaints": "عرض الشكاوي",
+
+
+
     "create-companies": "إنشاء الشركات",
     "edit-companies": "تعديل الشركات",
     "delete-companies": "حذف الشركات",
@@ -46,6 +53,13 @@
     "show-category-unit": "عرض تصنيفات وحدات القياس",
 
 
+    "Location": "الموقع",
+    "Resolution": "حل الشكوى",
+    "Resolved at": "تم الحل في",
+    "Phone number": "رقم الهاتف",
+    "Title": "العنوان",
+    "advertise": "إعلان",
+    "advertises": "الإعلانات",
     "Choose a Category": "إختر التصنيف",
     "prices": "الأسعار",
     "issue": "العدد",

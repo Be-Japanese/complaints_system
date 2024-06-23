@@ -68,6 +68,17 @@ class UserResource extends Resource
                     ->preload(),
 
 
+                Forms\Components\ToggleButtons::make('status')
+                    ->label('Status')
+                    ->translateLabel()
+                    ->grouped()
+                    ->colors([
+                        'Active' => 'success',
+                        'Inactive' => 'danger',
+                    ])
+                    ->options(Status::class)
+
+
 
             ]);
     }
@@ -141,7 +152,10 @@ class UserResource extends Resource
     {
         return __('users');
     }
-
+    public static function getModelLabel(): string
+    {
+        return __('user');
+    }
 
     public static function getGloballySearchableAttributes(): array
     {
@@ -158,8 +172,5 @@ class UserResource extends Resource
     }
 
 
-    public static function getModelLabel(): string
-    {
-        return __('user');
-    }
+
 }
