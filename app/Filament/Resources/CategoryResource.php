@@ -6,10 +6,14 @@ use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Guava\FilamentIconPicker\Forms\IconPicker;
+use Guava\FilamentIconPicker\Layout;
+use Guava\FilamentIconPicker\Tables\IconColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -21,27 +25,31 @@ class CategoryResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->translateLabel()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->translateLabel()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('description')
-                    ->required()
-                    ->translateLabel()
-                    ->maxLength(255),
-            ]);
+        return $form->schema([
+            TextInput::make('name')
+                ->required()
+                ->translateLabel()
+                ->maxLength(255),
+            TextInput::make('slug')
+                ->required()
+                ->translateLabel()
+                ->maxLength(255),
+            TextInput::make('description')
+                ->required()
+                ->translateLabel()
+                ->maxLength(255),
+            IconPicker::make('icon')
+                ->sets(['heroicons', 'fontawesome-solid'])
+                ->translateLabel()
+                ->layout(Layout::ON_TOP),
+        ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
+                IconColumn::make('icon'),
                 Tables\Columns\TextColumn::make('name')
                     ->translateLabel()
                     ->searchable(),
@@ -65,9 +73,7 @@ class CategoryResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+            ->actions([Tables\Actions\EditAction::make()])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -78,8 +84,8 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
-        ];
+                //
+            ];
     }
 
     public static function getPages(): array

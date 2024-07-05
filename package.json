@@ -3,11 +3,28 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "prettier": "prettier",
+        "prepare": "husky install",
+        "format": "prettier --write ."
     },
     "devDependencies": {
-        "axios": "^1.6.4",
+        "@prettier/plugin-php": "^0.22.2",
+        "@shufo/prettier-plugin-blade": "^1.14.1",
+        "@tailwindcss/forms": "^0.5.7",
+        "@tailwindcss/typography": "^0.5.13",
+        "alpinejs": "^3.4.2",
+        "autoprefixer": "^10.4.19",
+        "husky": "^8.0.3",
         "laravel-vite-plugin": "^1.0",
+        "lint-staged": "^13.2.2",
+        "postcss": "^8.4.39",
+        "postcss-nesting": "^12.1.5",
+        "prettier": "^3.2.5",
+        "tailwindcss": "^3.4.4",
         "vite": "^5.0"
+    },
+    "lint-staged": {
+        "*.{js,tsx,css,md,php,blade.php}": "prettier --write"
     }
 }

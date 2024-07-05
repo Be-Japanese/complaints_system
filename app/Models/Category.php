@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-
-    protected $fillable = ['name', 'slug', 'description'];
+    protected $fillable = ['name', 'slug', 'description', 'icon'];
 
     public function complaints(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

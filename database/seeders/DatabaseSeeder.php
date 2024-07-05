@@ -26,9 +26,17 @@ class DatabaseSeeder extends Seeder
             'status' => 'Active',
         ]);
 
+        $user2 = User::factory()->create([
+            'name' => 'Monsef Eledrisse',
+            'email' => 'monsef@test.com',
+            'city_id' => $misurata->id,
+            'status' => 'Active',
+        ]);
+
         $this->call([PermissionSeeder::class]);
 
         $user = User::find(1);
         $user->assignRole('Super Admin');
+        $user2->assignRole('Super Admin');
     }
 }
