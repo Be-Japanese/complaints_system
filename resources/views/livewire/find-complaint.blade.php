@@ -90,7 +90,7 @@
         <div class="grid grid-cols-1 gap-[30px] md:grid-cols-2 lg:grid-cols-2">
             @foreach ($complaints as $complaint)
                 <div
-                    class="group rounded-lg bg-white shadow transition-all duration-500 hover:shadow-lg dark:bg-gray-800 dark:shadow-gray-700">
+                    class="group flex h-full flex-col rounded-lg bg-white shadow transition-all duration-500 hover:shadow-lg dark:bg-gray-800 dark:shadow-gray-700">
                     <div class="flex items-center justify-between p-6">
                         <div class="flex items-center">
                             <div class="ms-3">
@@ -98,8 +98,9 @@
                                     class="block text-[16px] font-semibold transition-all duration-500 dark:text-gray-100">
                                     {{ $complaint->category->name }}
                                 </div>
-                                <span
-                                    class="block text-sm text-slate-400">{{ $complaint->created_at->diffForHumans() }}</span>
+                                <span class="block text-sm text-slate-400">
+                                    {{ $complaint->created_at->diffForHumans() }}
+                                </span>
                             </div>
                         </div>
                         <div
@@ -108,7 +109,8 @@
                         </div>
                     </div>
 
-                    <div class="items-center justify-between border-t border-gray-100 p-6 dark:border-gray-800 lg:flex">
+                    <div
+                        class="flex-grow items-center justify-between border-t border-gray-100 p-6 dark:border-gray-800 lg:flex">
                         <div>
                             <div class="text-lg font-semibold dark:text-gray-200">
                                 {{ $complaint->title }}
@@ -124,7 +126,6 @@
                             <span class="inline-block font-semibold dark:text-gray-200">
                                 {{ $complaint->name }}
                             </span>
-
                         </div>
                         <span class="me-1 inline-block text-slate-400">
                             {{ $complaint->address }}
