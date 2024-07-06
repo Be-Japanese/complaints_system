@@ -52,6 +52,11 @@
     "delete-category-unit": "حذف تصنيفات وحدات القياس",
     "show-category-unit": "عرض تصنيفات وحدات القياس",
 
+    "pending": "قيد الإنتظار",
+    "processing": "جاري العمل عليها",
+    "resolved": "تم حل المشكلة",
+    "rejected": "للأسف لايمكن العمل على هذه المشكلة",
+
 
     "Location": "الموقع",
     "Resolution": "حل الشكوى",

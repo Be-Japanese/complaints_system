@@ -9,11 +9,12 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/complaint', function (Request $request) {
-    return view('pages.complaint', [
-        'title' => $request->query('title'),
-        'category' => $request->query('category'),
-    ]);
+    return view('pages.complaint');
 })->name('new-complaint');
+
+Route::get('/complaint/find', function (Request $request) {
+    return view('pages.find-complaint');
+})->name('find-complaint');
 
 //Route::get('/dashboard', function () {
 //    return view('dashboard');

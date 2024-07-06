@@ -821,6 +821,7 @@
                     </nav>
                 </div><!--end col-->
             </div><!--end grid-->
-        </div><!--end container-->
+        </div>
+        <!--end container-->
     </section>
 </x-new-guest-layout>

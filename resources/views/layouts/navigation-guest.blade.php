@@ -5,11 +5,20 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex shrink-0 items-center">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('home') }}" class="w-[50px]">
                         <x-application-logo />
                     </a>
                 </div>
 
+                <!-- Navigation Links -->
+                <div class="hidden gap-4 space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                        الرئيسية
+                    </x-nav-link>
+                    <x-nav-link :href="route('find-complaint')" :active="request()->routeIs('find-complaint')">
+                        متابعة الشكوى
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -48,6 +57,18 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+        <div class="space-y-1 pb-3 pt-2">
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                الرئيسية
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('find-complaint')" :active="request()->routeIs('find-complaint')">
+                متابعة الشكوى
+            </x-responsive-nav-link>
+        </div>
 
+        <!-- Responsive Settings Options -->
+        <div class="border-t border-gray-200 pb-1 pt-4 dark:border-gray-600">
+
+        </div>
     </div>
 </nav>
