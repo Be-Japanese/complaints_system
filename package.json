@@ -26,5 +26,8 @@
     },
     "lint-staged": {
         "*.{js,tsx,css,md,php,blade.php}": "prettier --write"
+    },
+    "dependencies": {
+        "preline": "^2.3.0"
     }
 }
