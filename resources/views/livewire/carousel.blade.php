@@ -18,9 +18,9 @@
             </div>
             <div class="absolute inset-0 flex justify-between">
                 <button @click="prevAd"
-                    class="m-4 rounded-full bg-gray-800 p-2 text-white shadow-lg hover:bg-gray-700 focus:outline-none">❮</button>
+                    class="m-4 rounded-full bg-gray-800/50 p-2 text-white shadow-lg hover:bg-gray-700 focus:outline-none">❮</button>
                 <button @click="nextAd"
-                    class="m-4 rounded-full bg-gray-800 p-2 text-white shadow-lg hover:bg-gray-700 focus:outline-none">❯</button>
+                    class="m-4 rounded-full bg-gray-800/50 p-2 text-white shadow-lg hover:bg-gray-700 focus:outline-none">❯</button>
             </div>
             <div class="absolute bottom-0 flex w-full justify-center pb-4">
                 <template x-for="(advertisement, index) in advertisements" :key="index">
