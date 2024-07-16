@@ -66,7 +66,7 @@
     <div class="mt-10 sm:mt-20">
         @foreach ($categorise as $category)
             <label for="option-{{ $loop->index }}"
-                class="@if ($categorise_form == $category->id) bg-orange-300 text-orange-900 dark:bg-orange-200 @else bg-white dark:bg-gray-900 dark:border-gray-700 dark:text-gray-200 @endif m-1 inline-flex cursor-pointer items-center gap-x-2 rounded-lg border border-gray-200 px-4 py-3 text-sm font-medium shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:hover:bg-neutral-800">
+                class="@if ($categorise_form == $category->id) bg-orange-300 text-orange-900 dark:bg-orange-200 @elseif($category->name == 'الملاحظات') bg-orange-600/75 dark:text-white @else bg-white dark:bg-gray-900 dark:border-gray-700 dark:text-gray-200 @endif m-1 inline-flex cursor-pointer items-center gap-x-2 rounded-lg border border-gray-200 px-4 py-3 text-sm font-medium shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50 dark:hover:bg-neutral-800">
                 <input wire:model.live="categorise_form" type="radio" name="option" value="{{ $category->id }}"
                     id="option-{{ $loop->index }}" class="peer hidden">
                 @svg($category->icon, 'size-4 flex-shrink-0')

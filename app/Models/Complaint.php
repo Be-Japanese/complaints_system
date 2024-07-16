@@ -8,10 +8,27 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Complaint extends Model implements HasMedia
 {
-
     use InteractsWithMedia;
-    protected $fillable = ['title', 'description', 'name', 'phone_number', 'city_id', 'address', 'location', 'category_id', 'status', 'resolution', 'resolved_at'];
+    protected $fillable = [
+        'title',
+        'description',
+        'name',
+        'phone_number',
+        'city_id',
+        'address',
+        'location',
+        'category_id',
+        'status',
+        'resolution',
+        'resolved_at',
+    ];
 
+    protected function casts(): array
+    {
+        return [
+            'location' => 'array',
+        ];
+    }
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Category::class);

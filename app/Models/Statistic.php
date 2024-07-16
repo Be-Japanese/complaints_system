@@ -12,5 +12,5 @@ class Statistic extends Model implements HasMedia
     use HasUuids;
     use InteractsWithMedia;
 
-    protected $fillable = ['title', 'description', 'status'];
+    protected $fillable = ['title', 'description', 'icon', 'status'];
 }

@@ -31,15 +31,23 @@ class AdminPanelProvider extends PanelProvider
             ->font('Noto Kufi Arabic')
             ->path('admin')
             ->login()
+            ->brandLogo(asset('assets/images/logo-new.png'))
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-            ->pages([
-                Pages\Dashboard::class,
-            ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverResources(
+                in: app_path('Filament/Resources'),
+                for: 'App\\Filament\\Resources',
+            )
+            ->discoverPages(
+                in: app_path('Filament/Pages'),
+                for: 'App\\Filament\\Pages',
+            )
+            ->pages([Pages\Dashboard::class])
+            ->discoverWidgets(
+                in: app_path('Filament/Widgets'),
+                for: 'App\\Filament\\Widgets',
+            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -51,8 +59,6 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->authMiddleware([
-                Authenticate::class,
-            ]);
+            ->authMiddleware([Authenticate::class]);
     }
 }

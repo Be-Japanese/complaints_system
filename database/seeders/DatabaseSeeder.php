@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\City;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -34,6 +35,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([PermissionSeeder::class]);
+
+        Category::create([
+            'name' => 'الملاحظات',
+            'description' => 'الملاحظات',
+            'icon' => 'heroicon-o-sparkles',
+            'slug' => 'الملاحظات',
+        ]);
 
         $user = User::find(1);
         $user->assignRole('Super Admin');

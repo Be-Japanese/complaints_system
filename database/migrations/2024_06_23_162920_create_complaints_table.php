@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,13 +15,24 @@ return new class extends Migration
             $table->id();
             $table->string('title', 255);
             $table->text('description');
-            $table->string('name', 255)->unique();
+            $table->string('name', 255)->nullable();
             $table->string('phone_number', 255)->nullable();
-            $table->foreignId('city_id')->constrained();
+            $table->foreignId('city_id')->nullable()->constrained();
             $table->string('address', 255)->nullable();
             $table->text('location')->nullable();
-            $table->foreignId('category_id')->constrained();
-            $table->enum('status', ['pending','processing' ,'resolved', 'rejected'])->default('pending');
+            $table
+                ->foreignId('category_id')
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
+            $table
+                ->enum('status', [
+                    'pending',
+                    'processing',
+                    'resolved',
+                    'rejected',
+                ])
+                ->default('pending');
             $table->text('resolution')->nullable();
             $table->timestamp('resolved_at')->nullable();
             $table->timestamps();

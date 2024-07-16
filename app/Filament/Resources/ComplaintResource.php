@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ComplaintResource\Pages;
 use App\Filament\Resources\ComplaintResource\RelationManagers;
 use App\Models\Complaint;
+use Dotswan\MapPicker\Fields\Map;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
@@ -22,77 +23,106 @@ class ComplaintResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->translateLabel()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->translateLabel()
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('name')
-                    ->translateLabel()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phone_number')
-                    ->translateLabel()
-                    ->tel()
-                    ->maxLength(255),
-                Forms\Components\Select::make('city_id')
-                    ->translateLabel()
-                    ->relationship('city', 'name')
-                    ->required(),
-                Forms\Components\TextInput::make('address')
-                    ->translateLabel()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('location')
-                    ->translateLabel()
-                    ->columnSpanFull(),
-                Forms\Components\Select::make('category_id')
-                    ->label('Category')
-                    ->translateLabel()
-                    ->relationship('category', 'name')
-                    ->required(),
-                Forms\Components\Select::make('status')
-                    ->translateLabel()
-                    ->options([
-                        'pending' => 'Pending',
-                        'processing' => 'Processing',
-                        'resolved' => 'Resolved',
-                        'rejected' => 'Rejected',
-                    ])
-                    ->required(),
-                Forms\Components\Textarea::make('resolution')
-                    ->translateLabel(),
-                Forms\Components\DateTimePicker::make('resolved_at')
-                    ->translateLabel(),
+        return $form->schema([
+            Forms\Components\TextInput::make('title')
+                ->translateLabel()
+                ->required()
+                ->maxLength(255),
+            Forms\Components\Textarea::make('description')
+                ->translateLabel()
+                ->required()
+                ->columnSpanFull(),
+            Forms\Components\TextInput::make('name')
+                ->translateLabel()
 
-                SpatieMediaLibraryFileUpload::make('photo')
-                    ->label('Photo')
-                    ->translateLabel()
-                    ->collection('Complaints')
-                    ->rules('image', 'max:1024')
-                    ->columnSpanFull(),
-            ]);
+                ->maxLength(255),
+            Forms\Components\TextInput::make('phone_number')
+                ->translateLabel()
+                ->tel()
+                ->maxLength(255),
+            Forms\Components\Select::make('city_id')
+                ->translateLabel()
+                ->relationship('city', 'name'),
+            Forms\Components\TextInput::make('address')
+                ->translateLabel()
+                ->maxLength(255),
+            Map::make('location')
+                ->label('Location')
+                ->columnSpanFull()
+                ->default([
+                    'lat' => 40.4168,
+                    'lng' => -3.7038,
+                ])
+                /* ->afterStateUpdated(function (
+                    Set $set,
+                    ?array $state,
+                ): void {
+                    $set('latitude', $state['lat']);
+                    $set('longitude', $state['lng']);
+                })*/
+                /*->afterStateHydrated(function (
+                    $state,
+                    $record,
+                    Set $set,
+                ): void {
+                    $set('location', [
+                        'lat' => $record->latitude,
+                        'lng' => $record->longitude,
+                    ]);
+                })*/
+                ->extraStyles(['min-height: 20vh', 'border-radius: 10px'])
+                ->liveLocation()
+                ->showMarker()
+                ->markerColor('#22c55eff')
+                ->showFullscreenControl()
+                ->showZoomControl()
+                ->draggable()
+                ->tilesUrl('https://tile.openstreetmap.de/{z}/{x}/{y}.png')
+                ->zoom(15)
+                ->detectRetina()
+                ->showMyLocationButton()
+                ->extraTileControl([])
+                ->extraControl([
+                    'zoomDelta' => 1,
+                    'zoomSnap' => 2,
+                ]),
+            Forms\Components\Select::make('category_id')
+                ->label('Category')
+                ->translateLabel()
+                ->relationship('category', 'name'),
+            Forms\Components\Select::make('status')
+                ->translateLabel()
+                ->options([
+                    'pending' => 'Pending',
+                    'processing' => 'Processing',
+                    'resolved' => 'Resolved',
+                    'rejected' => 'Rejected',
+                ]),
+            Forms\Components\Textarea::make('resolution')->translateLabel(),
+            Forms\Components\DateTimePicker::make(
+                'resolved_at',
+            )->translateLabel(),
+
+            SpatieMediaLibraryFileUpload::make('photo')
+                ->label('Photo')
+                ->translateLabel()
+                ->collection('Complaints')
+                ->rules('image', 'max:1024')
+                ->columnSpanFull(),
+        ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('phone_number')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('title')->searchable(),
+                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('phone_number')->searchable(),
                 Tables\Columns\TextColumn::make('city.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('address')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('address')->searchable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->numeric()
                     ->sortable(),
@@ -112,9 +142,7 @@ class ComplaintResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+            ->actions([Tables\Actions\EditAction::make()])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -125,8 +153,8 @@ class ComplaintResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
-        ];
+                //
+            ];
     }
 
     public static function getPages(): array

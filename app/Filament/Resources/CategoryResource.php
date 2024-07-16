@@ -73,10 +73,20 @@ class CategoryResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([Tables\Actions\EditAction::make()])
+            ->actions([
+                Tables\Actions\EditAction::make()->visible(
+                    fn(Category $category) => $category->name != 'الملاحظات',
+                ),
+                Tables\Actions\ViewAction::make()->visible(
+                    fn(Category $category) => $category->name == 'الملاحظات',
+                ),
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->visible(
+                        fn(Category $category) => $category->name !=
+                            'الملاحظات',
+                    ),
                 ]),
             ]);
     }

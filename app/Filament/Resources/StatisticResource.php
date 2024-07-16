@@ -12,6 +12,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Guava\FilamentIconPicker\Forms\IconPicker;
+use Guava\FilamentIconPicker\Layout;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -42,6 +44,10 @@ class StatisticResource extends Resource
                     'Inactive' => __('Inactive'),
                 ])
                 ->required(),
+            IconPicker::make('icon')
+                ->sets(['heroicons', 'fontawesome-solid'])
+                ->translateLabel()
+                ->layout(Layout::ON_TOP),
         ]);
     }
 

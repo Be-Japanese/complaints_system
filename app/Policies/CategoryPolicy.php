@@ -2,19 +2,22 @@
 
 namespace App\Policies;
 
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
 class CategoryPolicy
 {
-
     public function viewAny(User $user)
     {
         return $user->hasPermissionTo('show-categories');
     }
 
-    public function view(User $user)
+    public function view(User $user, Category $category)
     {
+        if ($category->name === 'الملاحظات') {
+            return false;
+        }
         return $user->hasPermissionTo('show-categories');
     }
 
@@ -23,14 +26,19 @@ class CategoryPolicy
         return $user->hasPermissionTo('create-categories');
     }
 
-    public function update(User $user)
+    public function update(User $user, Category $category)
     {
+        if ($category->name === 'الملاحظات') {
+            return false;
+        }
         return $user->hasPermissionTo('edit-categories');
     }
 
-    public function delete(User $user)
+    public function delete(User $user, Category $category)
     {
+        if ($category->name === 'الملاحظات') {
+            return false;
+        }
         return $user->hasPermissionTo('delete-categories');
     }
-
 }

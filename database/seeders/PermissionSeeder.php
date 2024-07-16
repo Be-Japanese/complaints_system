@@ -14,44 +14,51 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-      $permission_var = [
+        $permission_var = [
+            'create-users',
+            'edit-users',
+            'delete-users',
+            'show-users',
 
-       "create-users",
-        "edit-users",
-        "delete-users",
-        "show-users",
+            'create-roles',
+            'edit-roles',
+            'delete-roles',
+            'show-roles',
 
-        "create-roles",
-        "edit-roles",
-        "delete-roles",
-        "show-roles",
+            'create-cities',
+            'edit-cities',
+            'delete-cities',
+            'show-cities',
 
-        "create-cities",
-        "edit-cities",
-        "delete-cities",
-        "show-cities",
+            'create-categories',
+            'edit-categories',
+            'delete-categories',
+            'show-categories',
 
-        "create-categories",
-        "edit-categories",
-        "delete-categories",
-        "show-categories",
+            'create-complaints',
+            'edit-complaints',
+            'delete-complaints',
+            'show-complaints',
 
-        "create-complaints",
-        "edit-complaints",
-        "delete-complaints",
-        "show-complaints",
+            'create-advertising',
+            'edit-advertising',
+            'delete-advertising',
+            'show-advertising',
 
+            'create-statistic',
+            'edit-statistic',
+            'delete-statistic',
+            'show-statistic',
+        ];
 
-      ];
+        $permissions = collect($permission_var)->map(function ($permission) {
+            return ['name' => $permission, 'guard_name' => 'web'];
+        });
 
-      $permissions = collect($permission_var)->map(function ($permission) {
-        return ['name' => $permission, 'guard_name' => 'web'];
-      });
+        Permission::insert($permissions->toArray());
 
-      Permission::insert($permissions->toArray());
+        $adminRole = Role::create(['name' => 'Super Admin']);
 
-      $adminRole = Role::create(['name' => 'Super Admin']);
-
-      $adminRole->givePermissionTo($permission_var);
+        $adminRole->givePermissionTo($permission_var);
     }
 }

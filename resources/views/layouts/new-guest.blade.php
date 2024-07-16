@@ -9,7 +9,7 @@
             الشركة العامة لخدمات النظافة مصراتة
         </title>
 
-        <link rel="shortcut icon" href="{{ asset('assets/images/logo.jpg') }}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('assets/images/logo-new.png') }}" type="image/x-icon">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">

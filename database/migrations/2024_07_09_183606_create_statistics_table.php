@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->uuid('id')->primary();
             $table->text('title');
             $table->text('description');
+            $table->text('icon')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->timestamps();
         });
