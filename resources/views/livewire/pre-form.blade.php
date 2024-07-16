@@ -1,11 +1,8 @@
 <div class="text-center">
     <h1 class="text-4xl font-bold text-gray-800 dark:text-neutral-100 sm:text-6xl">
-        نحافظ على بيئتنا، لنعيش في صحة ونقاء
+        كون معانا ومتكونش علينا
     </h1>
-
-    <p class="mt-6 text-gray-600 dark:text-neutral-400">
-        قسم الشكاوى والإقتراحات
-    </p>
+    <h4 class="mt-3 text-2xl font-semibold">ساهم في المحافظة على مدينتك</h4>
 
     <div class="relative mx-auto mt-7 max-w-xl sm:mt-12">
         <!-- Form -->
